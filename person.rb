@@ -5,29 +5,7 @@ class Person
     @name = name
     @parent_permission = parent_permission
   end
-    
-  # Getters
-  def id
-    @id
-  end
-  
-  def name
-    @name
-  end
 
-  def age
-    @age
-  end
-  
-  # Setters
-  def name=(name)
-    @name = name
-  end
-  
-  def age=(age)
-    @age = age
-  end
-  
   def can_use_service?
     of_age? || @parent_permission
   end
@@ -38,4 +16,6 @@ class Person
     age >= 18
   end
 
+  attr_reader :id
+  attr_writer :name, :age
 end
