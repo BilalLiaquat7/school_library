@@ -17,5 +17,5 @@ class Person
   end
 
   attr_reader :id
-  attr_writer :name, :age
+  attr_accessor :name, :age
 end
