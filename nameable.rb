@@ -1,5 +1,5 @@
-module Nameable
+class Nameable
   def correct_name
-    raise NotImplementedError
+    raise NotImplementedError, 'correct_name must be defined in subclass'
   end
 end
