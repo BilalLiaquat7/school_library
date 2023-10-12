@@ -1,6 +1,6 @@
 require './nameable'
-require './capitalizeDecorator'
-require './trimmerDecorator'
+require './capitalize_decorator'
+require './trimmer_decorator'
 
 class Person
   # include Nameable
