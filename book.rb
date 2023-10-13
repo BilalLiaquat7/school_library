@@ -11,6 +11,4 @@ class Book
   def add_rental(rental)
     rentals.push(rental)
   end
-
-
 end
