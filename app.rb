@@ -47,7 +47,7 @@ class App
       print 'Has parent permission? [Y/N]:'
       permission = gets.chomp
     end
-    person = Student.new(age, name, parent_permission: permission)
+    person = Student.new(age, name)
     type = 'Student'
 
     @people.push(person)
