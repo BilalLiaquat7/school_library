@@ -3,7 +3,6 @@ require './person'
 require './student'
 require './teacher'
 
-# create app class
 class App
   def initialize
     @people = []
@@ -19,7 +18,7 @@ class App
 
   def list_people
     @people.each do |person|
-      puts "[#{person.class.name}] Name:#{person.name} ID:#{person.id} Age:#{person.age}"
+      display_person_info(person)
     end
   end
 
@@ -68,9 +67,9 @@ class App
     author = gets.chomp
     print 'Title:'
     title = gets.chomp
-    print 'Book created successfully!'
     book = Book.new(title, author)
     @books.push(book)
+    puts 'Book created successfully!'
   end
 
   def create_rental
@@ -90,7 +89,7 @@ class App
     select_book
     return if @selected_book.nil?
 
-    rental_date
+    input_rental_date
 
     rental = @selected_person.add_rental(@date, @selected_book)
     @rentals.push(rental)
@@ -100,7 +99,7 @@ class App
   def select_person
     puts 'Please select a person from the list below by a number (and not the id):'
     @people.each_with_index do |person, index|
-      puts "#{index + 1}. [#{person.class.name}] Name: #{person.name} ID: #{person.id} Age: #{person.age}"
+      display_person_info(person, index + 1)
     end
     person_choice = gets.chomp.to_i
     @selected_person = @people[person_choice - 1]
@@ -109,13 +108,13 @@ class App
   def select_book
     puts 'Please select the book from the list below by a number:'
     @books.each_with_index do |book, index|
-      puts "#{index + 1}. Title: \"#{book.title}\", Author: #{book.author}"
+      display_book_info(book, index + 1)
     end
     book_choice = gets.chomp.to_i
     @selected_book = @books[book_choice - 1]
   end
 
-  def rental_date
+  def input_rental_date
     print 'Date (YYYY/MM/DD): '
     @date = gets.chomp
   end
@@ -130,8 +129,25 @@ class App
     else
       puts 'Rentals:'
       person_rentals.each do |rental|
-        puts "Date: #{rental.date}, Book: #{rental.book.title}, by #{rental.book.author}"
+        display_rental_info(rental)
       end
     end
+  end
+
+  private
+
+  def display_person_info(person, index = nil)
+    person_type = person.class.name
+    person_info = "[#{person_type}] Name: #{person.name} ID: #{person.id} Age: #{person.age}"
+    person_info = "#{index}. #{person_info}" if index
+    puts person_info
+  end
+
+  def display_book_info(book, index)
+    puts "#{index}. Title: \"#{book.title}\", Author: #{book.author}"
+  end
+
+  def display_rental_info(rental)
+    puts "Date: #{rental.date}, Book: #{rental.book.title}, by #{rental.book.author}"
   end
 end
